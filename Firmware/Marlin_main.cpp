@@ -3149,7 +3149,7 @@ void gcode_M701()
 		st_synchronize();
 
 		if (current_position[Z_AXIS] < 20) current_position[Z_AXIS] += 30;
-		current_position[E_AXIS] += 30;
+		current_position[E_AXIS] += 20;
 		plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 400 / 60, active_extruder); //fast sequence
 		
 		load_filament_final_feed(); //slow sequence
