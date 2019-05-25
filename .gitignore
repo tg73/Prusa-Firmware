@@ -4,6 +4,7 @@
 Debug
 Firmware/Configuration_prusa.h
 Firmware/Doc
+/Firmware/.vscode
 /Firmware/.vs/Firmware/v14
 /Firmware/__vm
 /Firmware/Firmware.sln
