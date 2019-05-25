@@ -2087,6 +2087,7 @@ static void lcd_preheat_menu()
 	  MENU_ITEM_FUNCTION_P(PSTR("HIPS -  " STRINGIFY(HIPS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(HIPS_PREHEAT_HPB_TEMP)), lcd_preheat_hips);
 	  MENU_ITEM_FUNCTION_P(PSTR("PP   -  " STRINGIFY(PP_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PP_PREHEAT_HPB_TEMP)), lcd_preheat_pp);
 	  MENU_ITEM_FUNCTION_P(PSTR("FLEX -  " STRINGIFY(FLEX_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(FLEX_PREHEAT_HPB_TEMP)), lcd_preheat_flex);
+    MENU_ITEM_FUNCTION_P(PSTR("nozzle -  " STRINGIFY(FARM_PREHEAT_HOTEND_TEMP) "/0"), lcd_preheat_farm_nozzle);
 	  if (!wizard_active) MENU_ITEM_FUNCTION_P(_T(MSG_COOLDOWN), lcd_cooldown);
   }
   
@@ -5402,11 +5403,11 @@ void unload_filament()
 
 	//		extr_unload2();
 
-	current_position[E_AXIS] -= 45;
+	current_position[E_AXIS] -= 32;
 	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 5200 / 60, active_extruder);
 	st_synchronize();
-	current_position[E_AXIS] -= 15;
-	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 1000 / 60, active_extruder);
+  current_position[E_AXIS] -= 10;
+  plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 100 / 60, active_extruder);
 	st_synchronize();
 	current_position[E_AXIS] -= 20;
 	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 1000 / 60, active_extruder);
@@ -7478,4 +7479,3 @@ void menu_lcd_lcdupdate_func(void)
 	lcd_send_status();
 	if (lcd_commands_type == LCD_COMMAND_V2_CAL) lcd_commands();
 }
-
